@@ -1,5 +1,11 @@
 # word-miner
 
+![word-miner](assets/banner.png)
+
+[▶ Demo video (≈40 s)](assets/demo.mp4) — real tool handlers running in an isolated Hermes home.
+
+![demo](assets/shot-2.png)
+
 Turn any text you are consuming — song lyrics, subtitles, an article, a chat — into a personal vocabulary deck and run short daily spaced-repetition sessions **inside Hermes**. Any language pair. Local only: no Anki, no AnkiConnect, nothing to install.
 
 ## 30-second quickstart
