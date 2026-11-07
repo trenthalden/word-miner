@@ -1,0 +1,22 @@
+name: word-miner
+version: 0.1.0
+manifest_version: 2
+api_version: 1
+description: >
+  Turn any text you are consuming (lyrics, subtitles, articles, chat) into a
+  personal vocabulary deck and run short daily spaced-repetition sessions inside
+  Hermes. Any language pair. Local only — no Anki, no AnkiConnect, no network.
+author: trenthalden
+requires_hermes: ">=0.22.5"
+homepage: https://github.com/trenthalden/word-miner
+tags: [vocabulary, srs, language-learning, local]
+config_schema:
+  daily_new_cap:
+    type: int
+    default: 20
+    description: Maximum number of brand-new lemmas accepted per deck per calendar day.
+provides_tools:
+  - deck_add_words
+  - deck_session
+  - deck_grade
+  - deck_stats
