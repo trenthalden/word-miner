@@ -14,7 +14,7 @@ tier: community
 category: tools
 requires_hermes: ">=0.22.5"
 docs_url: https://github.com/trenthalden/word-miner#readme
-version: "0.1.0"
+version: "0.1.1"
 platforms: [macos, linux, windows]
 capabilities:
   provides_tools:
