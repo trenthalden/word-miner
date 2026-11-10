@@ -25,7 +25,7 @@ def handle_deck(raw_args: str = "") -> str:
     rest = parts[1].strip() if len(parts) > 1 else ""
 
     if head == "stats":
-        payload = json.loads(deck_stats(deck=rest or None))
+        payload = json.loads(deck_stats({"deck": rest} if rest else {}))
         return _format_stats(payload)
 
     if head == "grade":
@@ -55,7 +55,7 @@ def handle_deck(raw_args: str = "") -> str:
 
 def _start_or_continue(deck: str) -> str:
     if _SESSION.get("deck") != deck or not _SESSION.get("cards"):
-        payload = json.loads(deck_session(deck=deck))
+        payload = json.loads(deck_session({"deck": deck}))
         if not payload.get("ok"):
             return f"Could not build session: {payload.get('error')}"
         cards = payload.get("cards") or []
@@ -84,7 +84,7 @@ def _start_or_continue(deck: str) -> str:
     idx = int(_SESSION.get("index", 0))
     cards = _SESSION.get("cards") or []
     if idx >= len(cards):
-        stats = json.loads(deck_stats(deck=deck))
+        stats = json.loads(deck_stats({"deck": deck}))
         _SESSION.clear()
         return "Session complete.\n" + _format_stats(stats)
     return _render_card(intro=False)
@@ -150,14 +150,14 @@ def _handle_grade(rest: str) -> str:
     else:
         answer = rest
 
-    payload = json.loads(
-        deck_grade(
-            card_id=card["card_id"],
-            answer=answer,
-            rating=rating,
-            response_ms=response_ms,
-        )
-    )
+    grade_args: Dict[str, Any] = {"card_id": card["card_id"]}
+    if answer is not None:
+        grade_args["answer"] = answer
+    if rating is not None:
+        grade_args["rating"] = rating
+    if response_ms is not None:
+        grade_args["response_ms"] = response_ms
+    payload = json.loads(deck_grade(grade_args))
     if not payload.get("ok"):
         return f"Grade failed: {payload.get('error')}"
 

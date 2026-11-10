@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 — 2026-11-10
+
+- Fix: tool handlers use Hermes' `(args, **kwargs)` signature — tools failed in real sessions.
+
 ## 0.1.1 — 2026-11-09
 
 - Fix dashboard backend mount: expose module-level `router = APIRouter()` so Hermes
